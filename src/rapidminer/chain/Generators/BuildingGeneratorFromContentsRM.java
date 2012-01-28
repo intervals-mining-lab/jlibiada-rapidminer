@@ -7,7 +7,7 @@ import com.rapidminer.operator.OperatorDescription;
 import com.rapidminer.operator.UserError;
 import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
-import libiada.IntervalAnalysis.Buildings.BuildingGenerator;
+import rapidminer.chain.Buildings.BuildingGenerator;
 import rapidminer.chain.RMContents;
 
 import java.util.ArrayList;

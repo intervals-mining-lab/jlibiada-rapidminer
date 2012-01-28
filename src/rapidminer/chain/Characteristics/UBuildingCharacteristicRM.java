@@ -5,8 +5,6 @@ import com.rapidminer.operator.OperatorException;
 import com.rapidminer.parameter.ParameterType;
 import com.rapidminer.parameter.ParameterTypeString;
 import libiada.FastChainAlgorithms.FastChain.FastChain;
-import libiada.IntervalAnalysis.Chain;
-import libiada.Root.SimpleTypes.ValueString;
 
 import java.util.List;
 

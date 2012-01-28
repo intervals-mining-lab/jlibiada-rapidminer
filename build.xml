@@ -1,4 +1,4 @@
-﻿<project name="RapidMiner_Plugin_HMM_Vega" default="install">
+﻿<project name="rapidminer_vega" default="install">
         <description>Build file for the RapidMiner HMM Extension</description>
 
         <property name="rm.dir" location="/home/alex/Programs/rapidminer/" />
@@ -30,8 +30,6 @@
         <property name="extension.errorDescription" value="/com/rapidminer/resources/i18n/ErrorsHMM.properties" />
         <property name="extension.userErrors" value="/com/rapidminer/resources/i18n/UserErrorMessagesHMM.properties" />
         <property name="extension.guiDescription" value="/com/rapidminer/resources/i18n/GUIHMM.properties" />
-
-
 
         <!-- Src files -->
         <path id="build.sources.path">

@@ -1,9 +1,15 @@
 package rapidminer.chain.Decompositor;
 
-import com.rapidminer.example.*;
-import com.rapidminer.operator.*;
-import com.rapidminer.operator.ports.*;
-import libiada.IntervalAnalysis.MixedChain;
+import com.rapidminer.example.Attributes;
+import com.rapidminer.example.Example;
+import com.rapidminer.example.ExampleSet;
+import com.rapidminer.example.ExampleSetFactory;
+import com.rapidminer.operator.Operator;
+import com.rapidminer.operator.OperatorDescription;
+import com.rapidminer.operator.OperatorException;
+import com.rapidminer.operator.ports.InputPort;
+import com.rapidminer.operator.ports.OutputPort;
+import main.IntervalAnalysis.MixedChain;
 
 /**
  * Created by IntelliJ IDEA.

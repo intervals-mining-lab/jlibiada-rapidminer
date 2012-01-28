@@ -93,7 +93,7 @@ public class FastPositionedCharacteristicRM extends Operator {
     }
 
     protected Double getValue(FastChain chain) throws Exception {
-        return getCharacteristic().getValue(chain, getLinkUp());
+        return getCharacteristic().getValue(chain.getFastUniformChain(getParameter(FIRST_UCHAIN_SYM)), getLinkUp());
     }
 
     protected FastCalculatorBase getCharacteristic() throws Exception {
@@ -107,11 +107,11 @@ public class FastPositionedCharacteristicRM extends Operator {
             }
         }
         if (item.contentEquals("g")) {
-            return FastCalculatorFactory.getPositionedAverageRemoteness(getParameter(FIRST_UCHAIN_SYM), poses, 3);
+            return FastCalculatorFactory.getPositionedAverageRemoteness(poses, 3);
         } else if (item.contentEquals("P")) {
-            return FastCalculatorFactory.getPositionedPropability(getParameter(FIRST_UCHAIN_SYM), poses, 3);
+            return FastCalculatorFactory.getPositionedPropability(poses, 3);
         } else if (item.contentEquals("n")) {
-            return FastCalculatorFactory.getPositionedEventCount(getParameter(FIRST_UCHAIN_SYM), poses, 3);
+            return FastCalculatorFactory.getPositionedEventCount(poses, 3);
         } else {
             throw new Exception("Not identified characteristic");
         }

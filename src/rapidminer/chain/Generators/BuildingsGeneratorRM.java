@@ -7,7 +7,7 @@ import com.rapidminer.operator.OperatorException;
 import com.rapidminer.operator.io.AbstractReader;
 import com.rapidminer.parameter.ParameterType;
 import com.rapidminer.parameter.ParameterTypeInt;
-import libiada.IntervalAnalysis.Buildings.BuildingsTree;
+import rapidminer.chain.Buildings.BuildingsTree;
 
 import java.util.ArrayList;
 import java.util.List;

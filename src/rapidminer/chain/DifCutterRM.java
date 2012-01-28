@@ -7,14 +7,10 @@ import com.rapidminer.operator.Operator;
 import com.rapidminer.operator.OperatorDescription;
 import com.rapidminer.operator.OperatorException;
 import com.rapidminer.operator.ports.InputPort;
-import com.rapidminer.operator.ports.InputPorts;
 import com.rapidminer.operator.ports.OutputPort;
-import libiada.DiffBuildingAnalysis.DifCutter;
-import libiada.DiffBuildingAnalysis.Iterators.CutRuleIterator;
-import libiada.DiffBuildingAnalysis.Rules.CutRule;
-import libiada.DiffBuildingAnalysis.Rules.FromFixStartCutRule;
+import main.DiffBuildingAnalysis.DifCutter;
+import main.DiffBuildingAnalysis.Rules.FromFixStartCutRule;
 
-import javax.management.OperationsException;
 import java.util.ArrayList;
 
 /**
@@ -34,12 +30,12 @@ public class DifCutterRM extends Operator {
 
     @Override
     public void doWork() throws OperatorException {
-        ExampleSet examples = inChain.getData();  //со входного порта считали информацицию, получили таблицу
-        Example example = examples.getExample(0); //получили строчку таблицы данных
+        ExampleSet examples = inChain.getData();
+        Example example = examples.getExample(0);
         String s = example.getValueAsString(examples.getAttributes().get("Chain"));
-        DifCutter dif = new DifCutter();   //рубит строчку
-        FromFixStartCutRule rule = new FromFixStartCutRule(s.length(), 100);  //првило разбиения
-        ArrayList<String> cuts =  dif.cut(s, rule);  //метод разрубающий строчку
+        DifCutter dif = new DifCutter();
+        FromFixStartCutRule rule = new FromFixStartCutRule(s.length(), 100);
+        ArrayList<String> cuts =  dif.cut(s, rule);
 
         String[][] values = new String[cuts.size()][1];
 

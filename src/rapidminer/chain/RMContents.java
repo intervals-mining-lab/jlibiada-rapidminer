@@ -6,7 +6,7 @@ import com.rapidminer.operator.Operator;
 import com.rapidminer.operator.ports.OutputPort;
 import com.rapidminer.operator.ports.ProcessingStep;
 import com.rapidminer.tools.LoggingHandler;
-import libiada.IntervalAnalysis.Buildings.Contents;
+import rapidminer.chain.Buildings.Contents;
 
 import java.io.IOException;
 import java.io.OutputStream;

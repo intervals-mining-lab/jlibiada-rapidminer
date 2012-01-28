@@ -10,7 +10,7 @@ import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
 import com.rapidminer.parameter.ParameterType;
 import com.rapidminer.parameter.ParameterTypeInt;
-import libiada.IntervalAnalysis.Buildings.BuildingsTree;
+import rapidminer.chain.Buildings.BuildingsTree;
 
 import java.util.List;
 

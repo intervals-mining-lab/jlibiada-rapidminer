@@ -50,11 +50,11 @@
     <orderEntry type="library" name="Rapidminer" level="project" />
     <orderEntry type="library" name="HMM" level="project" />
     <orderEntry type="library" name="Rapidminer" level="project" />
-    <orderEntry type="library" name="BioJava" level="project" />
     <orderEntry type="library" name="Bio" level="project" />
     <orderEntry type="library" name="BioJava" level="project" />
-    <orderEntry type="library" name="JasperReports" level="project" />
-    <orderEntry type="library" name="MySQL" level="project" />
+    <orderEntry type="library" name="core-fast" level="project" />
+    <orderEntry type="library" name="core" level="project" />
+    <orderEntry type="library" name="misc" level="project" />
   </component>
 </module>
 
