@@ -1,48 +1,100 @@
-﻿<project name="rapidminer_vega" default="install">
-        <description>Build file for the RapidMiner HMM Extension</description>
+﻿<project xmlns:ivy="antlib:org.apache.ivy.ant" name="jlibiada-rapidminer" default="run">
+    <description>Build file for the RapidMiner HMM Extension</description>
 
-        <property name="rm.dir" location="/home/alex/Programs/rapidminer/" />
+    <property name="rm.dir" location="/home/ftp/rapidminer/" />
+    <property name="build.build" location="build" />
+    <property name="build.resources" location="resources" />
+    <property name="build.lib" location="lib" />
 
-        <property name="build.build" location="build" />
-        <property name="build.resources" location="resources" />
-        <property name="build.lib" location="lib" />
+    <property name="check.sources" location = "src" />
 
-        <property name="check.sources" location = "src" />
+    <property name="javadoc.targetDir" location="javadoc" />
 
-        <property name="javadoc.targetDir" location="javadoc" />
+    <property name="extension.name" value="HMM" />
+    <property name="extension.name.long" value="RapidMiner Hidden Markov Model" />
+    <property name="extension.namespace" value="hmm" />
+    <property name="extension.vendor" value="AMIS" />
+    <property name="extension.admin" value="Rudolf Kadlec" />
+    <property name="extension.url" value="http://artemis.ms.mff.cuni.cz" />
 
-        <property name="extension.name" value="HMM" />
-        <property name="extension.name.long" value="RapidMiner Hidden Markov Model" />
-        <property name="extension.namespace" value="hmm" />
-        <property name="extension.vendor" value="AMIS" />
-        <property name="extension.admin" value="Rudolf Kadlec" />
-        <property name="extension.url" value="http://artemis.ms.mff.cuni.cz" />
+    <property name="extension.needsVersion" value="5.0" />
+    <property name="extension.dependencies" value="" />
 
+    <property name="extension.initClass" value="cz.cuni.amis.rapidminer.PluginInitHMM" />
+    <property name="extension.objectDefinition" value="/com/rapidminer/resources/ioobjectsHMM.xml" />
+    <property name="extension.operatorDefinition" value="/com/rapidminer/resources/OperatorsHMM.xml" />
+    <property name="extension.parseRuleDefinition" value="/com/rapidminer/resources/parserulesHMM.xml" />
+    <property name="extension.groupProperties" value="/com/rapidminer/resources/groupsHMM.properties" />
+    <property name="extension.errorDescription" value="/com/rapidminer/resources/i18n/ErrorsHMM.properties" />
+    <property name="extension.userErrors" value="/com/rapidminer/resources/i18n/UserErrorMessagesHMM.properties" />
+    <property name="extension.guiDescription" value="/com/rapidminer/resources/i18n/GUIHMM.properties" />
 
-        <property name="extension.needsVersion" value="5.0" />
-        <property name="extension.dependencies" value="" />
+    <property name="ivy.install.version" value="2.2.0"/>
+    <property name="ivy.jar.dir" value="${basedir}/ivy"/>
+    <property name="ivy.lib.dir" value="lib"/>
+    <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar"/>
 
-        <property name="extension.initClass" value="cz.cuni.amis.rapidminer.PluginInitHMM" />
-        <property name="extension.objectDefinition" value="/com/rapidminer/resources/ioobjectsHMM.xml" />
-        <property name="extension.operatorDefinition" value="/com/rapidminer/resources/OperatorsHMM.xml" />
-        <property name="extension.parseRuleDefinition" value="/com/rapidminer/resources/parserulesHMM.xml" />
-        <property name="extension.groupProperties" value="/com/rapidminer/resources/groupsHMM.properties" />
-        <property name="extension.errorDescription" value="/com/rapidminer/resources/i18n/ErrorsHMM.properties" />
-        <property name="extension.userErrors" value="/com/rapidminer/resources/i18n/UserErrorMessagesHMM.properties" />
-        <property name="extension.guiDescription" value="/com/rapidminer/resources/i18n/GUIHMM.properties" />
+    <property name="jsch.jar.version" value="0.1.45"/>
+	<property name="jsch.jar.name" value="jsch-${jsch.jar.version}.jar"/>
+    <available property="jsch.installed" file="${ivy.jar.dir}/${jsch.jar.name}"/>
 
-        <!-- Src files -->
-        <path id="build.sources.path">
-                <dirset dir="src">
-                        <include name="**" />
-                </dirset>
-        </path>
-        <fileset dir="src" id="build.sources">
-                <include name="**/*.java" />
-        </fileset>
-        <fileset id="build.dependentExtensions" dir="..">
+    <!-- Src files -->
+    <path id="build.sources.path">
+        <dirset dir="src">
+            <include name="**" />
+        </dirset>
+    </path>
+    <fileset dir="src" id="build.sources">
+        <include name="**/*.java" />
+    </fileset>
+    <fileset id="build.dependentExtensions" dir="..">
         <exclude name="**/*"/>
-        </fileset>
+    </fileset>
+    <import file="${rm.dir}/build_extension.xml" />
 
-        <import file="${rm.dir}/build_extension.xml" />
+    <target name="download-ivy" unless="skip.download">
+        <mkdir dir="${ivy.jar.dir}"/>
+        <!--
+        download Ivy from web site so that it can be used even without any special installation
+        -->
+        <echo message="installing ivy..."/>
+        <get src="http://repo1.maven.org/maven2/org/apache/ivy/ivy/${ivy.install.version}/ivy-${ivy.install.version}.jar" dest="${ivy.jar.file}" usetimestamp="true"/>
+    </target>
+
+    <target name="install-ivy" depends="download-ivy" description="--> install ivy">
+        <path id="ivy.lib.path">
+            <fileset dir="${ivy.jar.dir}" includes="*.jar"/>
+        </path>
+        <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpath="${ivy.jar.file};${ivy.jar.dir}/${jsch.jar.name}"/>
+    </target>
+
+    <target name="clean-ivy" description="--> clean the ivy installation">
+        <!--<delete dir="${ivy.jar.dir}"/>-->
+    </target>
+    <!--
+    ================================= target: clean-cache =================================
+    -->
+    <target name="clean-cache" depends="install-ivy" description="--> clean the ivy cache">
+        <ivy:cleancache/>
+    </target>
+
+    <target name="ivy-resolve" depends="clean-cache">
+        <!--<ivy:configure file="${basedir}/ivyconf.xml"/>-->
+        <ivy:resolve />
+    </target>
+
+    <target name="ivy-retrieve" depends="ivy-resolve">
+        <ivy:retrieve pattern="${ivy.lib.dir}/[conf]/[artifact]-[revision].[ext]" sync="true"/>
+    </target>
+
+    <!--<target name="ftp-publish" depends="jar-make">-->
+        <!--<ivy:publish resolver="ssh-serv"-->
+                     <!--pubrevision="1.0"-->
+                     <!--overwrite="true"-->
+                     <!--artifactspattern="${dist}/[artifact].[ext]"/>-->
+    <!--</target>-->
+
+    <target name="run" depends="ivy-retrieve">
+        <antcall target="install"/>
+    </target>
 </project>
