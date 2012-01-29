@@ -1,6 +1,4 @@
 ﻿<project xmlns:ivy="antlib:org.apache.ivy.ant" name="jlibiada-rapidminer" default="run">
-    <description>Build file for the RapidMiner HMM Extension</description>
-
     <property name="rm.dir" location="/home/ftp/rapidminer/" />
     <property name="build.build" location="build" />
     <property name="build.resources" location="resources" />
@@ -10,7 +8,7 @@
 
     <property name="javadoc.targetDir" location="javadoc" />
 
-    <property name="extension.name" value="HMM" />
+    <property name="extension.name" value="Libiada" />
     <property name="extension.name.long" value="RapidMiner Hidden Markov Model" />
     <property name="extension.namespace" value="hmm" />
     <property name="extension.vendor" value="AMIS" />
